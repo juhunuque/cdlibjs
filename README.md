@@ -83,4 +83,4 @@ MIT License
 ## Links
 
 - Github: [certificateDeposit-calculator] (https://github.com/juhunuque/certificateDeposit-calculator)
-- Sample: [www.desarrollosnunez.net/cdCalculator] (www.desarrollosnunez.net/cdCalculator/index.html)
+- Sample: [http://www.desarrollosnunez.net/cdCalculator/index.html] (http://www.desarrollosnunez.net/cdCalculator/index.html)
