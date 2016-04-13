@@ -69,6 +69,8 @@ Download the library and import it within your project:
 - cdLib.calculatingRateDates( interest, capital, startDate, endDate )
 - cdLib.calculatingCapital( interest, rate, term )
 - cdLib.calculatingCapitalDates( interest, rate, startDate, endDate )
+- cdLib.annualisedYield( inverstment, performance, days )
+- cdLib.annualisedYieldDates( inverstment, performance, startDate, endDate )
 - cdLib.daysBetweenDates( start, end )
 
 
