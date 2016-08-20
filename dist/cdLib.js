@@ -9,14 +9,14 @@
  * Date: 2016-03-24
  */
 (function(cdLib, $, undefined){
-    
+
     cdLib.calculatingInterest = function( capital, rate, term ){
         /*
          *   FORMULA:
-         *       (Capital * rate * term)/ 365 (Natural Days) 
+         *       (Capital * rate * term)/ 365 (Natural Days)
          *    INPUT:
          *    - capital = Numeric
-         *    - rate = In percentage 
+         *    - rate = In percentage
          *    - term = Days within the period
          *    OUTPUT:
          *    - Interest earned
@@ -25,23 +25,23 @@
             if(isEmptyObject(capital) || isEmptyObject(rate) || isEmptyObject(term)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return (capital * (rate/100) * term) / 365;
         }catch(err){
             console.error("CDLIB " + err.message);
             console.trace();
             return 0;
         }
-        
+
     };
-    
+
     cdLib.calculatingInterestDates = function( capital, rate, startDate, endDate ){
         /*
          *   FORMULA:
-         *       (Capital * rate * term)/ 365 (Natural Days) 
+         *       (Capital * rate * term)/ 365 (Natural Days)
          *    INPUT:
          *    - capital = Numeric
-         *    - rate = In percentage 
+         *    - rate = In percentage
          *    - term = Days within the period
          *    - startDate = Start date in Date format
          *    - endDate = End date in Date format
@@ -52,23 +52,23 @@
             if(isEmptyObject(capital) || isEmptyObject(rate) || isEmptyObject(startDate) || isEmptyObject(endDate)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return (capital * (rate/100) * cdLib.daysBetweenDates(startDate, endDate)) / 365;
         }catch(err){
             console.error("CDLIB " + err.message);
             console.trace();
             return 0;
         }
-        
+
     };
-    
+
     cdLib.calculatingTerm = function( interest, capital, rate ){
         /*
          *   FORMULA:
          *      (Interest * 365) / (Capital * rate)
          *   INPUT:
          *   - capital = Numeric
-         *   - rate = In percentage 
+         *   - rate = In percentage
          *   - interest = Numeric
          *   OUTPUT:
          *   - Term days
@@ -77,7 +77,7 @@
             if(isEmptyObject(interest) || isEmptyObject(capital) || isEmptyObject(rate)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return (interest*365) / (capital*(rate/100));
         }catch(err){
             console.error("CDLIB " + err.message);
@@ -85,16 +85,16 @@
             return 0;
         }
     };
-    
+
     cdLib.calculatingRate = function( interest, capital, term ){
         /*
          *   FORMULA:
          *       (Interest * 365) / (Capital * term)
          *    INPUT:
          *    - interest = Numeric
-         *    - capital = Numeric 
+         *    - capital = Numeric
          *    - term = Days within the period
-         
+
          *    OUTPUT:
          *    - Rate in percentage
         */
@@ -102,7 +102,7 @@
             if(isEmptyObject(interest) || isEmptyObject(capital) || isEmptyObject(term)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return ((interest * 365)/(capital*term)) * 100;
         }catch(err){
             console.error("CDLIB " + err.message);
@@ -110,14 +110,14 @@
             return 0;
         }
     };
-    
+
     cdLib.calculatingRateDates = function( interest, capital, startDate, endDate ){
         /*
          *   FORMULA:
          *       (Interest * 365) / (Capital * term)
          *    INPUT:
          *    - interest = Numeric
-         *    - capital = Numeric 
+         *    - capital = Numeric
          *    - term = Days within the period
          *    - startDate = Start date in Date format
          *    - endDate = End date in Date format
@@ -128,7 +128,7 @@
             if(isEmptyObject(interest) || isEmptyObject(capital) || isEmptyObject(startDate) || isEmptyObject(endDate)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return ((interest * 365)/(capital*cdLib.daysBetweenDates(startDate, endDate))) * 100;
         }catch(err){
             console.error("CDLIB " + err.message);
@@ -136,14 +136,14 @@
             return 0;
         }
     };
-    
+
     cdLib.calculatingCapital = function( interest, rate, term ){
         /*
         *    FORMULA:
-        *       (Interest * 365) / (Rate * Term)  
+        *       (Interest * 365) / (Rate * Term)
         *    INPUT:
         *    - interest = Numeric
-        *    - rate = In percentage 
+        *    - rate = In percentage
         *    - term = Days within the period
         *    OUTPUT:
         *    - Capital
@@ -152,7 +152,7 @@
             if(isEmptyObject(interest) || isEmptyObject(rate) || isEmptyObject(term)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return ((interest * 365)/((rate/100) * term));
         }catch(err){
             console.error("CDLIB " + err.message);
@@ -160,14 +160,14 @@
             return 0;
         }
     };
-    
+
     cdLib.calculatingCapitalDates = function( interest, rate, startDate, endDate ){
         /*
         *    FORMULA:
-        *       (Interest * 365) / (Rate * Term)  
+        *       (Interest * 365) / (Rate * Term)
         *    INPUT:
         *    - interest = Numeric
-        *    - rate = In percentage 
+        *    - rate = In percentage
         *    - term = Days within the period
         *    OUTPUT:
         *    - Capital
@@ -176,7 +176,7 @@
             if(isEmptyObject(interest) || isEmptyObject(rate) || isEmptyObject(startDate)|| isEmptyObject(endDate)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return ((interest * 365)/((rate/100) * cdLib.daysBetweenDates(startDate, endDate)));
         }catch(err){
             console.error("CDLIB " + err.message);
@@ -184,40 +184,40 @@
             return 0;
         }
     }
-    
-    
-    cdLib.annualisedYield = function( inverstment, performance, days ){
+
+
+    cdLib.annualisedYield = function( investment, performance, days ){
         /*
-        * Get the annualised yield of an Inverstment Found
+        * Get the annualised yield of an Investment Found
         *    FORMULA:
-        *       ((Final Value / Initial Value)^(365/days))-1  
+        *       ((Final Value / Initial Value)^(365/days))-1
         *    INPUT:
-        *    - inverstment = Numeric
+        *    - investment = Numeric
         *    - performance = Numeric
         *    - days = Days within the period
         *    OUTPUT:
         *    - Capital
         */
         try{
-            if(isEmptyObject(inverstment) || isEmptyObject(performance) || isEmptyObject(days)){
+            if(isEmptyObject(investment) || isEmptyObject(performance) || isEmptyObject(days)){
                 throw new UserException('INVALID DATA');
             }
-            
-            return (Math.pow((performance/inverstment),(365/days)))-1;
+
+            return (Math.pow((performance/investment),(365/days)))-1;
         }catch(err){
             console.error("CDLIB " + err.message);
             console.trace();
             return 0;
         }
     }
-    
-    cdLib.annualisedYieldDates = function( inverstment, performance, startDate, endDate ){
+
+    cdLib.annualisedYieldDates = function( investment, performance, startDate, endDate ){
         /*
-        * Get the annualised yield of an Inverstment Found
+        * Get the annualised yield of an Investment Found
         *    FORMULA:
-        *       ((Final Value / Initial Value)^(365/days))-1  
+        *       ((Final Value / Initial Value)^(365/days))-1
         *    INPUT:
-        *    - inverstment = Numeric
+        *    - investment = Numeric
         *    - performance = Numeric
         *    - startDate = Start date in Date format
         *    - endDate = End date in Date format
@@ -225,31 +225,31 @@
         *    - Capital
         */
         try{
-            if(isEmptyObject(inverstment) || isEmptyObject(performance) || isEmptyObject(startDate) || isEmptyObject(endDate)){
+            if(isEmptyObject(investment) || isEmptyObject(performance) || isEmptyObject(startDate) || isEmptyObject(endDate)){
                 throw new UserException('INVALID DATA');
             }
-            
-            return (Math.pow((performance/inverstment),(365/cdLib.daysBetweenDates(startDate, endDate))))-1;
+
+            return (Math.pow((performance/investment),(365/cdLib.daysBetweenDates(startDate, endDate))))-1;
         }catch(err){
             console.error("CDLIB " + err.message);
             console.trace();
             return 0;
         }
     }
-    
+
     cdLib.daysBetweenDates = function( start, end ){
        /*
         *    INPUT:
         *    - start = Start date
-        *    - end = End date 
+        *    - end = End date
         *    OUTPUT:
         *    - Number of days
-        */ 
+        */
         try{
             if(isEmptyObject(start) || isEmptyObject(end)){
                 throw new UserException('INVALID DATA');
             }
-            
+
             return Math.floor(( Date.parse(end) - Date.parse(start) ) / 86400000) - 2;
         }catch(err){
             console.error("CDLIB " + err.message);
@@ -257,7 +257,7 @@
             return 0;
         }
     };
-    
+
     function isEmptyObject(item){
         if(typeof item === 'undefined' || item === null || item === ''){
             return true;
@@ -265,7 +265,7 @@
             return false;
         }
     }
-    
+
     function UserException(message) {
        this.message = message;
        this.name = "UserException";
